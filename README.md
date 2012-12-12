@@ -1,4 +1,4 @@
-# Intruduction to Ruby Metaprogramming
+# Intruduction to Meta-Programming with Ruby
 
 ## About Ruby
 
