@@ -38,9 +38,11 @@ You can call a method programatically like this:
 This allows you to do silly things like:
 
     def calc(left, operator, right)
-      raise "unknown operator" unless ['+', '-', '/', '*'].include?(operand)
+      raise "unknown operator" unless ['+', '-', '/', '*'].include?(operator)
       left.send(operator,right)
 	end
+	
+	puts calc 1, '+', 1    #=> 2
 
 The `send` method opens a world to you during runtime, where you can call methods for which you may not even know the name.
 
