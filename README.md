@@ -78,29 +78,61 @@ As you can see, this is very powerful, and at the same time can be very dangerou
 
 As `send` allows you to call methods programatically, the `define_method` method lets to define methods in an existing class at runtime. This method belongs to the `Class` object, so you would call it on an instance of the `Class` object, otherwise known as a class definition.
 
-    class  
+    class FruitBasket
+	
+      def self.fruits(*fruits)
+	    fruits.each do |fruit|
+      
+          define_method("#{fruit}s") {
+	        instance_variable_get("@#{fruit}s")
+		  }
+      
+		  define_method("#{fruit}s=") { |p|
+	        instance_variable_set("@#{fruit}s", p)		  }
+      
+        end
+	  end
+	
+	end
+	
+	class SorryBasket < FruitBasket
+	  
+	  fruits :lychee, :mango, :mangosteen 
+	  
+	  def initialize(a,b,c) 
+	    @lychees      = a
+	    @mangos       = b
+	    @mangosteens  = c
+	  end
+	  
+	end
+	
+	missed_date_basket = SorryBasket.new(36,6,8)
+	
+	puts missed_date_basket.lychees       #=> 36
+	puts missed_date_basket.mangos        #=> 6
+	puts missed_date_basket.mangosteens   #=> 8
+	
+	missed_date_basket.mangosteens = 99
+	
+	missed_date_basket.rambutan = 30      #=> No Method Error!
+
+    
 
 ### method_missing
 
+`TODO`
+
 
 ## Practical Examples
+
+### ruby attr_accessor
 
 ### Active Record Relations
 
 ### Active Record Find
 
-## Demo
 
-### Add method to array
- 
- + foldl
-
-### Define ruby attr_accessor
-
-
-
-
-### Define parrot
 
 
 
