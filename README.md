@@ -129,7 +129,7 @@ So lets say you add some methods to existing classes, call methods for which you
 Ruby has a very powerful way to implement this: the `method_missing()` method. When an object receives a method call, it will first search through its own class definition, then through parent classes, and finally, if no method is found - `method_missing` is called with the name of the method as an argument. In the root class, `method_missing` is something like this:
 
     def method_missing(method_name, *args)
-      raise "Method: #{method_name} not defined!"
+      raise "NoMethodError: #{method_name} not defined!"
     end
     
 This defines the default behavior for `method_missing`: just throw an exception.
@@ -194,7 +194,7 @@ In any Ruby class, you can do something like the folowing
       
     hao.to_s => 好朋友学生在学习计算机科学，住在西区C座9楼304房
     
-So lets think about this. We already know how we ould implement this ourselves using the meta-programming we studied earlier.
+So lets think about this. We already know how we could implement this ourselves using the meta-programming we studied earlier.
 
     class Shuxingable
 
@@ -232,9 +232,18 @@ So lets think about this. We already know how we ould implement this ourselves u
 So not only are we able to create our own Chinese dialect of Ruby, we can do it in 10 lines. This is where you start to see how much fun it can be to write code the ruby way!
 
 
-### Rails Active Record Relations
+### Rails Action Controller Filters
 
-The Rails framework makes heavy use of meta-programming to provide really clean abstrations for the application developer. In the Active Record module, which acts as a bridge from the 
+The Rails framework makes heavy use of meta-programming to provide really clean abstrations for the application developer. Here, they define powerful class methods and use the `send` method to implement a filter chain to process an incoming http request.
+	
+	class ApplicationController < ActionController::Base
+	  before_filter :require_login, :ensure_ssl, :prepare_data
+	
+	  # ... 
+	end
+    # from <http://guides.rubyonrails.org/action_controller_overview.html>
+ 
+ Many web application frameworks provide a filter chain as an way to better organize the code you would want to run for every request. In Rails, this is as simple as listing the methods you want to be called, in order. Any of these methods can halt the chain and respond with a redirect, or set up data structures for later use in the action method.
 
 
 ### Rails Active Record Find
