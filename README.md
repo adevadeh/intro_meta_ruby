@@ -145,9 +145,7 @@ But now we can override `method_missing` in our own class, and make it do whatev
     
       def method_missing(method_name)
         if method_name.to_s =~ /^hello_(.+)$/
-      
           puts "#{salutation} #{$1.capitalize}!"
-      
         else
           super # important!
         end
