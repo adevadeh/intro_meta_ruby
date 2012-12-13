@@ -182,7 +182,8 @@ So lets think about this. We already know how we could implement this ourselves 
 	        instance_variable_get("@#{shuxing}")
 	      }
 	      define_method("#{shuxing}=") { |p|
-	        instance_variable_set("@#{shuxing}", p)		  }
+	        instance_variable_set("@#{shuxing}", p)  
+	      }
         end 
       end
     end
