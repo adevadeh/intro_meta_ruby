@@ -1,4 +1,3 @@
-
 class Greeter
   attr_reader :salutation
   
@@ -7,13 +6,8 @@ class Greeter
   end
     
   def method_missing(method_name)
-    if method_name.to_s =~ /^hello_(.+)$/
-      
-      puts "#{salutation} #{$1}!"
-      
-    else
-      super # important!
-    end
+    super unless method_name.to_s =~ /^hello_(.+)$/
+    puts "#{salutation} #{$1}!"
   end
       
 end

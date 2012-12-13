@@ -36,7 +36,7 @@ You can call a method programatically like this:
     obj.send('method', arg)
     student.send("add_class", "Introduction to Ruby")
     
-This allows you to do silly things like:
+This allows you to do interesting things like:
 
     def calc(left, operator, right)
       raise "unknown operator" unless ['+', '-', '/', '*'].include?(operator)

@@ -1,16 +1,15 @@
 class FruitBasket
 	
 	def self.fruits(*fruits)
-		fruits.each do |fruit|
+	  fruits.each do |fruit|
       
-			define_method("#{fruit}s") {
+	    define_method("#{fruit}s") {
 			  instance_variable_get("@#{fruit}s")
-			}
+      }
       
 			define_method("#{fruit}s=") { |p|
 			  instance_variable_set("@#{fruit}s", p)			  
 			}
-      
     end
 	end
 

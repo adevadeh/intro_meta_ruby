@@ -3,15 +3,12 @@ class Shuxingable
   def self.wo_de_shuxing(*shuxings)
     
     shuxings.each do |shuxing|
-    
 	    define_method(shuxing) {
 	      instance_variable_get("@#{shuxing}")
 	    }
-      
 	    define_method("#{shuxing}=") { |p|
 	      instance_variable_set("@#{shuxing}", p)			  
       }
-      
     end 
   end
 end
