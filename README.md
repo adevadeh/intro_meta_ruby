@@ -42,6 +42,7 @@ This allows you to do interesting things like:
       raise "unknown operator" unless ['+', '-', '/', '*'].include?(operator)
       left.send(operator,right)
 	end
+	
 	calc 1, '+', 1    #=> 2
 
 The `send` method opens a world to you during runtime, where you can call methods for which you may not even know the name.
@@ -53,14 +54,17 @@ In Ruby, a class definition isn't static. It's an object in memory that can be c
 Let's add some methods to Array:
 
     class Array
+      
       def hello
         "Hello, I'm an #{self.class.name}!"
       end
+      
 	  def foldl(method)
 	    inject(0) { |result, element| 
 	      result ? result.send(method, element) : 0
 	    }
       end
+      
       def first
        self.last
       end
@@ -104,6 +108,7 @@ As `send()` allows you to call methods programatically, the `define_method()` me
 	missed_date_basket.mangos        #=> 6
 	missed_date_basket.mangosteens   #=> 8
 	missed_date_basket.mangosteens = 99
+	
 	missed_date_basket.rambutan = 30      #=> No Method Error!
 
 Note that `define_method` is not a method of the class FruitBasket. In fact, it is a method belonging to 
@@ -124,20 +129,24 @@ But now we can override `method_missing` in our own class, and make it do whatev
 
     class Greeter
       attr_reader :salutation
+      
       def initialize(sal)
         @salutation = sal
       end
+      
       def method_missing(method_name)
         super unless method_name.to_s =~ /^hello_(.+)$/
-        
+      
         puts "#{salutation} #{$1.capitalize}!"
       end
     end
 
     chinese = Greeter.new("你好")
     chinese.hello_jim	     #=> 你好 Jim
+    
     swahili = Greeter.new("Habari")
     swahili.hello_paul      #=> Habari Paul
+    
     chinese.goodbye_tim     #=> NoMethodError
 
 This example wouldn't make much sense in the real world, but it does illustrate the power of method_missing.

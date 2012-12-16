@@ -16,10 +16,9 @@ class Array
   
 end
 
-# begin
 a = [1,2,3,4,5,6,7,8,9,10]
 
 puts a.hello       #=> Hello, I'm an Array! 
-puts a.foldl('+')  #=> 56
+puts a.foldl('+')  #=> 55
 puts a.first       #=> 10
 
